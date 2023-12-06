@@ -15,9 +15,13 @@ public class moveSphere : MonoBehaviour
         transform.position = new Vector3(randomX, 0, 0);
         speed = 3;
     }
-
+ 
     void Update()
     {
+        move();
+    }
+
+    void move(){
         // Obtém a posição atual do ponto.
         Vector3 position = transform.position;
 
@@ -38,7 +42,6 @@ public class moveSphere : MonoBehaviour
 
         // Atualiza a posição do ponto.
         transform.position = position;
-
     }
 
 }

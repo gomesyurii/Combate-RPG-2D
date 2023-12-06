@@ -6,17 +6,20 @@ public class playerDot : MonoBehaviour
 {
     [SerializeField] private float speed;
     public bool isMoving;
-    private int score;
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         speed = 3;
-        score = 0;
-        isMoving = true;
+       
+        isMoving = true; 
     }
 
     void Update()
     {
+        move();
+    }
+
+    void move(){
         // Obtém a posição atual do ponto.
         Vector3 position = transform.position;
 
@@ -37,6 +40,5 @@ public class playerDot : MonoBehaviour
 
         // Atualiza a posição do ponto.
         transform.position = position;
-
     }
 }
