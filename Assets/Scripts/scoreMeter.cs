@@ -27,24 +27,13 @@ public class scoreMeter : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             float distance = Mathf.Abs(playerDot.transform.position.x - firstDot.transform.position.x);
+             float totalDistance = 10; // Substitua isso pela distância total
 
+        // Calcula a porcentagem que a distância representa em relação à distância total.
+        damage = (distance / totalDistance) * 100;
+        damage = 100 - damage;
 
-            damage = (distance);
-            if (distance == 0)
-            {
-                damage = 100;
-            } 
-            else
-        {
-            // Faz a pontuação ser inversamente proporcional à distância.
-            damage = 100 / distance;
-
-            // Adiciona uma faixa gradativa de pontuações positivas e negativas.
-            damage -= distance;
-        }
-
-            damage = Mathf.Clamp(damage, 0, 100);
-            Debug.Log("Damage: " + damage);
+        Debug.Log("Damage: " + damage);
         }
 
     }
