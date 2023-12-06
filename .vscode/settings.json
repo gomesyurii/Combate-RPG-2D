@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Combate 2D.sln"
+    "dotnet.defaultSolution": "Combate-RPG-2D.sln"
 }
