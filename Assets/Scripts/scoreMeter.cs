@@ -26,21 +26,25 @@ public class scoreMeter : MonoBehaviour
         calculateDamage();
     }
 
-    private float calculateDamage()
+    private void calculateDamage()
     {
         damage = 0;
         if (Input.GetMouseButtonDown(0))
         {
             float distance = Mathf.Abs(PlayerDot.transform.position.x - FirstDot.transform.position.x);
-            float totalDistance = 9; // Substitua isso pela distância total
-
-            // Calcula a porcentagem que a distância representa em relação à distância total.
-            damage = (distance / totalDistance) * 100;
-            damage = 100 - damage;
+            float totalDistance = 9; 
+            float percentage = (distance / totalDistance) * 100;
+            damage = 100 - percentage;
 
             Debug.Log("Damage: " + damage);
+            PlayerDot.GetComponent<Dot>().isMoving = false;
+            FirstDot.GetComponent<Dot>().isMoving = false;
         }
-        return damage;
+        if (Input.GetMouseButtonDown(1))
+        {
+            PlayerDot.GetComponent<Dot>().isMoving = true;
+            FirstDot.GetComponent<Dot>().isMoving = true;
+        }
     }
 
 }
