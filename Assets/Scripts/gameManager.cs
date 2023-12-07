@@ -28,7 +28,6 @@ public class scoreMeter : MonoBehaviour
 
     private void calculateDamage()
     {
-        damage = 0;
         
             if (Input.GetMouseButtonDown(0))
             {
