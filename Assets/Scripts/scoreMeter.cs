@@ -34,8 +34,10 @@ public class scoreMeter : MonoBehaviour
             float distance = Mathf.Abs(PlayerDot.transform.position.x - FirstDot.transform.position.x);
             float totalDistance = 9; 
             float percentage = (distance / totalDistance) * 100;
+            float reflectedDamage = percentage;
             damage = 100 - percentage;
 
+            Debug.Log("Reflected Damage: " + reflectedDamage);
             Debug.Log("Damage: " + damage);
             PlayerDot.GetComponent<Dot>().isMoving = false;
             FirstDot.GetComponent<Dot>().isMoving = false;
