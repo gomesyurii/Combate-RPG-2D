@@ -9,7 +9,10 @@ public class scoreMeter : MonoBehaviour
 
     public GameObject PlayerDot;
     public GameObject FirstDot;
+    private bool gameEnded = false;
     private float damage;
+    public Character hero = new Character();
+    public Character enemy = new Character();
 
 
 
@@ -19,30 +22,65 @@ public class scoreMeter : MonoBehaviour
     {
         damage = 0;
 
+
     }
 
     void Update()
     {
+        if (gameEnded)
+        {
+            return;
+        }
         calculateDamage();
+        endGame();
     }
+
+
+    void endGame()
+    {
+        if (hero.currentHealth <= 0)
+        {
+            hero.currentHealth = 0;
+            Debug.Log("You lose");
+            gameEnded = true;
+
+        }
+
+        if (enemy.currentHealth <= 0)
+        {
+
+            Debug.Log("You win");
+            gameEnded = true;
+        }
+    }
+
 
     private void calculateDamage()
     {
-        
-            if (Input.GetMouseButtonDown(0))
-            {
-                float distance = Mathf.Abs(PlayerDot.transform.position.x - FirstDot.transform.position.x);
-                float totalDistance = 9;
-                float percentage = (distance / totalDistance) * 100;
-                damage = 100 - percentage;
-                float reflectedDamage = damage / 2; 
 
-                Debug.Log("Reflected Damage: " + reflectedDamage);
-                Debug.Log("Damage: " + damage);
-                PlayerDot.GetComponent<Dot>().isMoving = false;
-                FirstDot.GetComponent<Dot>().isMoving = false;
+        if (Input.GetMouseButtonDown(0) && PlayerDot.GetComponent<Dot>().isMoving == true && FirstDot.GetComponent<Dot>().isMoving == true)
+        {
+            float distance = Mathf.Abs(PlayerDot.transform.position.x - FirstDot.transform.position.x);
+            float totalDistance = 9;
+            float percentage = (distance / totalDistance) * 100;
+            damage = 100 - percentage;
+            float reflectedDamage = damage / 2; 
+            hero.currentHealth -= (int)reflectedDamage;
+            if (hero.currentHealth < 0)
+            {
+                hero.currentHealth = 0;
             }
-        
+            enemy.currentHealth -= (int)damage;
+            if (enemy.currentHealth < 0)
+            {
+                enemy.currentHealth = 0;
+            }
+            Debug.Log("Hero HP: " + hero.currentHealth);
+            Debug.Log("Enemy HP: " + enemy.currentHealth);
+            PlayerDot.GetComponent<Dot>().isMoving = false;
+            FirstDot.GetComponent<Dot>().isMoving = false;
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             PlayerDot.GetComponent<Dot>().isMoving = true;
